@@ -6,12 +6,12 @@ Computers are bad at division. Something we definitely don't want to do is perfo
 
 ## Approach
 
-By iterating through the range 0-N by 3 and 5 respectively, we can leave "breadcrumbs" at all of their multiples, which we can use on a third pass to populate the answer array with the correct data.
+By iterating through the range `0-N` by `3` and `5` respectively, we can leave "breadcrumbs" at all of their multiples, which we can use on a third pass to populate the answer array with the correct data.
 
-`threes * elementLength += 1` Leaves a mark at every number divisible by three. Fives does the same with `fives * elementLength += 2`, and if both land on the same number, the result will be `3`.
-Therefor to further optimize this, we can avoid using any comparators or branching by simply feeding these breadcrumbs into an array as the index (`responses[0, 1, 2, or 3]`), effectively creating a jump table. The default value of zero indexes to a format string `%d` for printing the current index as a string into the answer array.
+`threes * elementLength += 1` Leaves a mark at every number divisible by three. Five does the same with `fives * elementLength += 2`, and if both land on the same number, the result will be `3`.
+To further optimize this, we can now avoid using any comparators or branching by simply feeding these breadcrumbs into an array as the index (`responses[0, 1, 2, or 3]`), effectively creating a tiny jump table. The default value of `0` indexes to a format string `%d`, later used for printing the element's index as a string into the answer array.
 
-Next up, by using pointers efficiently to avoid multiple Malloc calls, we can significantly reduce both memory usage and execution time. This solution creates a single array containing both the i and j pointers one would expect in `answer[i][j]`, and manually assigns `answer[i]` to point to data elements just before populating them.
+Next up, by using pointer arithmetic to avoid making multiple Malloc calls, we can significantly reduce both memory usage and execution time. This solution creates a single array containing both the i and j pointers one would expect in `answer[i][j]`, and manually assigns `answer[i]` to point to data elements just before populating them.
 
 ## Complexity
 
